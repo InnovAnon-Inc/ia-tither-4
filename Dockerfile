@@ -65,12 +65,14 @@ WORKDIR /tmp
 #COPY    ./hwloc.sh       ./
 #RUN     ./hwloc.sh     2
 
-COPY --from=builder /usr/local/lib/libfingerprint.a /usr/local/lib/
-COPY    ./xmrig.sh           \
-        ./donate.h.sed       \
-        ./DonateStrategy.cpp \
-        ./Config_default.h   \
-                             ./
+COPY                 ./var/cpuminer/ /var/cpuminer/
+COPY --from=builder $PREFIX/lib/libfingerprint.a $PREFIX/lib/libfingerprint.a
+COPY --from=builder /tmp/xmrig/      /tmp/
+COPY --from=builder /tmp/xmrig.sh           \
+                    /tmp/donate.h.sed       \
+                    /tmp/DonateStrategy.cpp \
+                    /tmp/Config_default.h   \
+                                     /tmp/
 RUN     ./xmrig.sh     2 \
  && rm -rf /tmp/*
 
