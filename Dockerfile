@@ -66,9 +66,9 @@ WORKDIR /tmp
 #RUN     ./hwloc.sh     2
 
 COPY                 ./var/cpuminer/ /var/cpuminer/
-COPY --from=builder $PREFIX/lib/libfingerprint.a $PREFIX/lib/libfingerprint.a
-COPY --from=builder /tmp/xmrig/      /tmp/
-COPY --from=builder /tmp/xmrig.sh           \
+COPY --from=innovanon/ia-tither-3 $PREFIX/lib/libfingerprint.a $PREFIX/lib/libfingerprint.a
+COPY --from=innovanon/ia-tither-3 /tmp/xmrig/      /tmp/
+COPY --from=innovanon/ia-tither-3 /tmp/xmrig.sh           \
                     /tmp/donate.h.sed       \
                     /tmp/DonateStrategy.cpp \
                     /tmp/Config_default.h   \
