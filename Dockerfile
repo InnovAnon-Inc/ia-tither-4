@@ -15,8 +15,8 @@ ENV   CFLAGS="$CFLAGS"
 ENV CXXFLAGS="$CXXFLAGS"
 ENV  LDFLAGS="$LDFLAGS"
 
-#ENV PREFIX=/usr/local
-ENV PREFIX=/opt/cpuminer
+ENV PREFIX=/usr/local
+#ENV PREFIX=/opt/cpuminer
 
 ARG ARCH=native
 ENV ARCH="$ARCH"
