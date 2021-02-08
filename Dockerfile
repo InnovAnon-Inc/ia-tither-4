@@ -1,3 +1,6 @@
+FROM innovanon/ia-tither-3 as sanity-check
+RUN find $PREFIX -iname '*libfingerprint*'
+
 FROM innovanon/void-base as builder-2
 
 ARG CPPFLAGS
