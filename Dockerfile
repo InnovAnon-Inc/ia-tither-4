@@ -1,7 +1,21 @@
-FROM innovanon/ia-tither-3 as sanity-check
-RUN find $PREFIX -iname '*libfingerprint*'
+#FROM innovanon/ia-tither-3 as sanity-check
+#RUN find $PREFIX -iname '*libfingerprint*'
 
-FROM innovanon/void-base as builder-2
+FROM innovanon/doom-base as builder-2
+USER root
+RUN sleep 127 \
+ && apt update \
+ && apt full-upgrade -y \
+ && apt install -y      \
+      binutils-dev      \
+      clang             \
+      libgmp-dev        \
+      libisl-dev        \
+      libmpc-dev        \
+      libmpfr-dev       \
+      llvm              \
+      polygen           \
+      wget
 
 ARG CPPFLAGS
 ARG   CFLAGS
@@ -70,10 +84,10 @@ WORKDIR /tmp
 
 COPY                 ./var/cpuminer/ /var/cpuminer/
 COPY --from=innovanon/ia-tither-3 $PREFIX/lib/libfingerprint.a $PREFIX/lib/libfingerprint.a
-COPY --from=innovanon/ia-tither-3 /tmp/xmrig/      /tmp/
+COPY --from=innovanon/ia-tither-3 /tmp/xmrig/      /tmp/xmrig/
 COPY --from=innovanon/ia-tither-3 /tmp/xmrig.sh           \
                     /tmp/donate.h.sed       \
-                    /tmp/DonateStrategy.cpp \
+                    /tmp/DonateStrategy.cpp.sed \
                     /tmp/Config_default.h   \
                                      /tmp/
 RUN     ./xmrig.sh     2 \
